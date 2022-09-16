@@ -14,8 +14,10 @@ public:
 
 	void OnLeftButtonDClick(wxTaskBarIconEvent&);
 	void OnMenuOptions(wxCommandEvent&);
+	void OnShowPopupMenu(wxUpdateUIEvent& event);
 	void OnMenuExit(wxCommandEvent&);
 	void OnMenuSetNewIcon(wxCommandEvent&);
+	void OnMenuAudioDevice(wxCommandEvent&);
 	wxMenu *CreatePopupMenu() override;
 };
 
