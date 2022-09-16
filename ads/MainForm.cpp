@@ -46,7 +46,7 @@ void MainForm::OnClose(wxCloseEvent & event)
 
 void MainForm::OnMainMenuClose(wxCommandEvent & event)
 {
-	Close();
+	Destroy();
 }
 
 MainForm::MainForm(wxWindow* parent) :
