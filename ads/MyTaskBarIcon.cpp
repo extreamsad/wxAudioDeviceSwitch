@@ -63,9 +63,12 @@ wxMenu * MyTaskBarIcon::CreatePopupMenu()
 		popup_menu->Append(devs_menu);
 		popup_menu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MyTaskBarIcon::OnMenuAudioDevice), this, devs_menu->GetId());
 		this->Connect(devs_menu->GetId(), wxEVT_UPDATE_UI, wxUpdateUIEventHandler(MyTaskBarIcon::OnMenuItemUpdateUI));
-		devs_menu->Check(bDefDev);		
 
-		bDefDev ? bDefDev = false : bDefDev;
+		if (bDefDev) 
+		{
+			devs_menu->Check(bDefDev);
+			bDefDev = false;
+		}
 	}
 	popup_menu->AppendSeparator();
 	popup_menu->Append(menu_options);
