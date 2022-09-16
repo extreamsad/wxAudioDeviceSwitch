@@ -19,17 +19,33 @@ HRESULT MainForm::SetDefaultAudioPlaybackDevice(LPCWSTR devID)
 
 }
 
+
+void MainForm::OnMainMenuClose(wxCommandEvent & event)
+{
+	Close();
+}
+
 MainForm::MainForm(wxWindow* parent) :
 	MainFormBase(parent)
 {
-	int nSoundCardCount = waveOutGetNumDevs();
 
+	//**m_taskbar = new MyTaskBarIcon(this);
+	if (!m_taskbar->SetIcon(wxArtProvider::GetBitmapBundle(wxART_WX_LOGO, wxART_OTHER, wxSize(32, 32)),
+		"Audio Device Switcher\n"
+		"(created by extream)"))
+	{
+//		wxLogError("Could not set icon.");
+	} /*/
+	/*int nSoundCardCount = waveOutGetNumDevs();
+	std::vector<std::wstring> devs;
+	WAVEOUTCAPS *woc = new WAVEOUTCAPS();
 	for (int i = 0; i < nSoundCardCount; i++)
 	{
-		WAVEOUTCAPS woc;
-		waveOutGetDevCaps(i, &woc, sizeof(woc));
 		
-	}
+		ZeroMemory(woc, sizeof(WAVEOUTCAPS));
+		waveOutGetDevCaps(i, woc, sizeof(WAVEOUTCAPS));
+		devs.emplace_back(woc->szPname);
+	}*/
 }
 
 MainForm::~MainForm()

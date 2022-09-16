@@ -1,6 +1,4 @@
 #include "wxMyApp.h"
-#include "MainForm.h"
-
 
 wxMyApp::wxMyApp()
 {

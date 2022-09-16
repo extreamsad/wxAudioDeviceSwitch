@@ -1,13 +1,15 @@
 #pragma once
 
-#include <wx/wx.h>
+#include "MainForm.h"
 #include <wx/taskbar.h>
 
-
-class MyTaskBarIcon : public wxTaskBarIcon
-{
+class MainForm;
+class MyTaskBarIcon : 
+	public wxTaskBarIcon
+{	
+	MainForm *m_main_form = nullptr;
 public:
-	MyTaskBarIcon();
+	MyTaskBarIcon(wxWindow * parent);
 	~MyTaskBarIcon();
 
 	void OnLeftButtonDClick(wxTaskBarIconEvent&);

@@ -9,6 +9,7 @@
 #include "wx/wx.h"
 #endif
 
+#include "MainForm.h"
 
 #include <map>
 #include <string>
