@@ -9,7 +9,7 @@ class MyTaskBarIcon :
 {	
 	MainForm *m_main_form = nullptr;
 public:
-	MyTaskBarIcon(wxWindow * parent);
+	MyTaskBarIcon(MainForm* parent);
 	~MyTaskBarIcon();
 
 	void OnLeftButtonDClick(wxTaskBarIconEvent&);

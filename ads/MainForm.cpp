@@ -26,15 +26,15 @@ void MainForm::OnMainMenuClose(wxCommandEvent & event)
 }
 
 MainForm::MainForm(wxWindow* parent) :
-	MainFormBase(parent)
+	MainFormBase(parent),
+	m_taskbar(new MyTaskBarIcon(this))
 {
-
-	//**m_taskbar = new MyTaskBarIcon(this);
+	
 	if (!m_taskbar->SetIcon(wxArtProvider::GetBitmapBundle(wxART_WX_LOGO, wxART_OTHER, wxSize(32, 32)),
-		"Audio Device Switcher\n"
-		"(created by extream)"))
+		"Audio device switch.\n"
+		"(Created by eXtream.)"))
 	{
-//		wxLogError("Could not set icon.");
+		wxLogError("Could not set icon.");
 	} /*/
 	/*int nSoundCardCount = waveOutGetNumDevs();
 	std::vector<std::wstring> devs;

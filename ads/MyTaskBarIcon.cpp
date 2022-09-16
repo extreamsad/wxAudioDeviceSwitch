@@ -2,8 +2,9 @@
 
 
 
-MyTaskBarIcon::MyTaskBarIcon(wxWindow * parent)
+MyTaskBarIcon::MyTaskBarIcon(MainForm* parent)
 {	
+	m_main_form = parent;
 }
 
 
@@ -23,7 +24,7 @@ void MyTaskBarIcon::OnMenuRestore(wxCommandEvent &)
 
 void MyTaskBarIcon::OnMenuExit(wxCommandEvent &)
 {
-	m_main_form->Close(true);
+	m_main_form->Close();
 }
 
 void MyTaskBarIcon::OnMenuSetNewIcon(wxCommandEvent &)
