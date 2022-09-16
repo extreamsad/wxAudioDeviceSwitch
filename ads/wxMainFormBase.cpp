@@ -15,6 +15,10 @@ MainFormBase::MainFormBase( wxWindow* parent, wxWindowID id, const wxString& tit
 
 	m_main_menu = new wxMenuBar( 0 );
 	m_mm_file = new wxMenu();
+	wxMenuItem* m_mm_test;
+	m_mm_test = new wxMenuItem( m_mm_file, wxID_ANY, wxString( wxT("Test") ) , wxEmptyString, wxITEM_NORMAL );
+	m_mm_file->Append( m_mm_test );
+
 	wxMenuItem* m_mm_close;
 	m_mm_close = new wxMenuItem( m_mm_file, wxID_ANY, wxString( wxT("Close") ) , wxEmptyString, wxITEM_NORMAL );
 	m_mm_file->Append( m_mm_close );
@@ -29,6 +33,7 @@ MainFormBase::MainFormBase( wxWindow* parent, wxWindowID id, const wxString& tit
 
 	// Connect Events
 	this->Connect( wxEVT_CLOSE_WINDOW, wxCloseEventHandler( MainFormBase::OnClose ) );
+	m_mm_file->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MainFormBase::OnMenuTest ), this, m_mm_test->GetId());
 	m_mm_file->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MainFormBase::OnMainMenuClose ), this, m_mm_close->GetId());
 }
 

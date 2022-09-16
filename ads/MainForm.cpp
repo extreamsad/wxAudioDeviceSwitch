@@ -19,6 +19,24 @@ HRESULT MainForm::SetDefaultAudioPlaybackDevice(LPCWSTR devID)
 
 }
 
+std::vector<WAVEOUTCAPS> MainForm::GetAudioPlaybackDevices()
+{
+	int nSoundCardCount = waveOutGetNumDevs();
+	std::vector<WAVEOUTCAPS> devs;	
+	for (int i = 0; i < nSoundCardCount; i++)
+	{		
+		WAVEOUTCAPS woc;
+		waveOutGetDevCaps(i, &woc, sizeof(WAVEOUTCAPS));
+		devs.emplace_back(woc);
+	}
+	return devs;
+}
+
+
+void MainForm::OnMenuTest(wxCommandEvent & event)
+{
+	
+}
 
 void MainForm::OnClose(wxCloseEvent & event)
 {
@@ -41,7 +59,9 @@ MainForm::MainForm(wxWindow* parent) :
 		"(Created by eXtream.)"))
 	{
 		wxLogError("Could not set icon.");
-	} /*/
+	} 
+	
+	/*/
 	/*int nSoundCardCount = waveOutGetNumDevs();
 	std::vector<std::wstring> devs;
 	WAVEOUTCAPS *woc = new WAVEOUTCAPS();

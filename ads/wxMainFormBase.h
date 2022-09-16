@@ -38,6 +38,7 @@ class MainFormBase : public wxFrame
 
 		// Virtual event handlers, override them in your derived class
 		virtual void OnClose( wxCloseEvent& event ) { event.Skip(); }
+		virtual void OnMenuTest( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnMainMenuClose( wxCommandEvent& event ) { event.Skip(); }
 
 
