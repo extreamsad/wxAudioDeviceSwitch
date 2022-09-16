@@ -28,11 +28,13 @@ MainFormBase::MainFormBase( wxWindow* parent, wxWindowID id, const wxString& tit
 	this->Centre( wxBOTH );
 
 	// Connect Events
+	this->Connect( wxEVT_CLOSE_WINDOW, wxCloseEventHandler( MainFormBase::OnClose ) );
 	m_mm_file->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MainFormBase::OnMainMenuClose ), this, m_mm_close->GetId());
 }
 
 MainFormBase::~MainFormBase()
 {
 	// Disconnect Events
+	this->Disconnect( wxEVT_CLOSE_WINDOW, wxCloseEventHandler( MainFormBase::OnClose ) );
 
 }

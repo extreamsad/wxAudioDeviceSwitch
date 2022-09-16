@@ -20,6 +20,12 @@ HRESULT MainForm::SetDefaultAudioPlaybackDevice(LPCWSTR devID)
 }
 
 
+void MainForm::OnClose(wxCloseEvent & event)
+{
+	Show(false);
+	//event.Skip();
+}
+
 void MainForm::OnMainMenuClose(wxCommandEvent & event)
 {
 	Close();
