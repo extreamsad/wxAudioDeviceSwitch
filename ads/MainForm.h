@@ -12,6 +12,7 @@
 #include <mmsystem.h>
 #include <Propidl.h>
 #include <mmdeviceapi.h>
+#include "AudioPlaybackControl.h"
 
 #include "PolicyConfig.h"
 

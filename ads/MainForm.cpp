@@ -53,7 +53,7 @@ MainForm::MainForm(wxWindow* parent) :
 	MainFormBase(parent),
 	m_taskbar(new MyTaskBarIcon(this))
 {
-	
+//	NextAudioPlaybackDevice();
 	if (!m_taskbar->SetIcon(wxArtProvider::GetBitmapBundle(wxART_WX_LOGO, wxART_OTHER, wxSize(32, 32)),
 		"Audio device switch.\n"
 		"(Created by eXtream.)"))

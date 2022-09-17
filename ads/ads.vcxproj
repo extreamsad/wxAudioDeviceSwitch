@@ -157,6 +157,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AudioPlaybackControl.h" />
     <ClInclude Include="MainForm.h" />
     <ClInclude Include="MyTaskBarIcon.h" />
     <ClInclude Include="PolicyConfig.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="wxMyApp.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AudioPlaybackControl.cpp" />
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="MyTaskBarIcon.cpp" />
     <ClCompile Include="wxMainFormBase.cpp" />
