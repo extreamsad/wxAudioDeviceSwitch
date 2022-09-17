@@ -19,6 +19,7 @@ public:
 	void OnMenuExit(wxCommandEvent&);
 	void OnMenuSetNewIcon(wxCommandEvent&);
 	void OnMenuAudioDevice(wxCommandEvent&);
+	void OnMenuAutorun(wxCommandEvent&);
 	wxMenu *CreatePopupMenu() override;
 };
 

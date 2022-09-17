@@ -44,11 +44,15 @@ void MyTaskBarIcon::OnMenuAudioDevice(wxCommandEvent &)
 {
 }
 
+void MyTaskBarIcon::OnMenuAutorun(wxCommandEvent &)
+{
+}
+
 wxMenu * MyTaskBarIcon::CreatePopupMenu()
 {		
 	wxMenu *popup_menu = new wxMenu();
 	wxMenuItem *menu_close = new wxMenuItem(popup_menu, wxID_ANY, wxString(wxT("Exit")), wxEmptyString, wxITEM_NORMAL);
-	wxMenuItem *menu_options = new wxMenuItem(popup_menu, wxID_ANY, wxString(wxT("Options")), wxEmptyString, wxITEM_NORMAL);
+	//wxMenuItem *menu_options = new wxMenuItem(popup_menu, wxID_ANY, wxString(wxT("Options")), wxEmptyString, wxITEM_NORMAL);
 
 	m_devices.reset(new std::vector<WAVEOUTCAPS>());
 	bool bDefDev = true;
@@ -71,10 +75,21 @@ wxMenu * MyTaskBarIcon::CreatePopupMenu()
 		}
 	}
 	popup_menu->AppendSeparator();
-	popup_menu->Append(menu_options);
-	popup_menu->Append(menu_close);
+
+	wxMenu *popup_options_subm = new wxMenu();
+	wxMenuItem *submenu_autorun = new wxMenuItem(popup_options_subm, wxID_ANY, wxString(wxT("Start with system")), wxEmptyString, wxITEM_CHECK);
+	popup_options_subm->Append(submenu_autorun);
+	popup_menu->AppendSubMenu(popup_options_subm, wxString(wxT("Options")));
+
+	wxMenu *popup_languages_subm = new wxMenu();
+	popup_options_subm->AppendSubMenu(popup_languages_subm, wxString(wxT("Languages")));
+
+	popup_menu->AppendSeparator();
+	//popup_menu->Append(menu_options);
+	popup_menu->Append(menu_close);	
 	
+	popup_options_subm->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MyTaskBarIcon::OnMenuAutorun), this, submenu_autorun->GetId());
 	popup_menu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MyTaskBarIcon::OnMenuExit), this, menu_close->GetId());
-	popup_menu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MyTaskBarIcon::OnMenuOptions), this, menu_options->GetId());
+	//popup_menu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MyTaskBarIcon::OnMenuOptions), this, menu_options->GetId());
 	return popup_menu;
 }
