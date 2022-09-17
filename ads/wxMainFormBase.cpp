@@ -12,6 +12,7 @@
 MainFormBase::MainFormBase( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	this->Hide();
 
 	m_main_menu = new wxMenuBar( 0 );
 	m_mm_file = new wxMenu();
@@ -33,7 +34,6 @@ MainFormBase::MainFormBase( wxWindow* parent, wxWindowID id, const wxString& tit
 
 	// Connect Events
 	this->Connect( wxEVT_CLOSE_WINDOW, wxCloseEventHandler( MainFormBase::OnClose ) );
-	m_mm_file->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MainFormBase::OnMenuTest ), this, m_mm_test->GetId());
 	m_mm_file->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MainFormBase::OnMainMenuClose ), this, m_mm_close->GetId());
 }
 

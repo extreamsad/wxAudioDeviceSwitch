@@ -32,12 +32,6 @@ std::vector<WAVEOUTCAPS> MainForm::GetAudioPlaybackDevices()
 	return devs;
 }
 
-
-void MainForm::OnMenuTest(wxCommandEvent & event)
-{
-	
-}
-
 void MainForm::OnClose(wxCloseEvent & event)
 {
 	Show(false);
@@ -54,6 +48,7 @@ MainForm::MainForm(wxWindow* parent) :
 	m_taskbar(new MyTaskBarIcon(this))
 {
 //	NextAudioPlaybackDevice();
+	//auto devs = EnumAudioPlaybackDevices();
 	if (!m_taskbar->SetIcon(wxArtProvider::GetBitmapBundle(wxART_WX_LOGO, wxART_OTHER, wxSize(32, 32)),
 		"Audio device switch.\n"
 		"(Created by eXtream.)"))

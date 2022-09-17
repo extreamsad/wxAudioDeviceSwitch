@@ -26,7 +26,6 @@ class MainForm :
 public:
 	static HRESULT SetDefaultAudioPlaybackDevice(LPCWSTR devID);
 	static std::vector<WAVEOUTCAPS> GetAudioPlaybackDevices();
-	virtual void OnMenuTest(wxCommandEvent& event) override;
 	virtual void OnClose(wxCloseEvent& event) override;
 	virtual void OnMainMenuClose(wxCommandEvent& event) override;
 	MainForm(wxWindow* parent);

@@ -50,21 +50,17 @@ wxMenu * MyTaskBarIcon::CreatePopupMenu()
 	wxMenuItem *menu_close = new wxMenuItem(popup_menu, wxID_ANY, wxString(wxT("Exit")), wxEmptyString, wxITEM_NORMAL);
 	//wxMenuItem *menu_options = new wxMenuItem(popup_menu, wxID_ANY, wxString(wxT("Options")), wxEmptyString, wxITEM_NORMAL);
 
-	m_devices.reset(new std::vector<WAVEOUTCAPS>());
 	bool bDefDev = true;
 
-	for (auto &device : MainForm::GetAudioPlaybackDevices())
+	for (auto &device : EnumAudioPlaybackDevices())
 	{
-		m_devices->emplace_back(device);
-
-		wxString dev_name{ device.szPname };		
-		wxMenuItem *devs_menu = new wxMenuItem(popup_menu, wxID_ANY, dev_name, wxEmptyString, wxITEM_CHECK);
-		
+		//wxString dev_name{ device.szPname };		
+		wxMenuItem *devs_menu = new wxMenuItem(popup_menu, wxID_ANY, device.first, wxEmptyString, wxITEM_CHECK);
+		std::wstring &DevID = device.second;
 		popup_menu->Append(devs_menu);		
-		popup_menu->Bind(wxEVT_COMMAND_MENU_SELECTED, [device](wxCommandEvent&)
-		{
-			std::wstring str = wxString::Format(L"%d", 1).ToStdWstring();
-			MainForm::SetDefaultAudioPlaybackDevice(str.c_str());
+		popup_menu->Bind(wxEVT_COMMAND_MENU_SELECTED, [DevID](wxCommandEvent&)
+		{			
+			MainForm::SetDefaultAudioPlaybackDevice(DevID.c_str());
 		}, devs_menu->GetId());
 		this->Connect(devs_menu->GetId(), wxEVT_UPDATE_UI, wxUpdateUIEventHandler(MyTaskBarIcon::OnMenuItemUpdateUI));
 

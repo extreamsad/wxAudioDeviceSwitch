@@ -24,6 +24,8 @@
 #include <mmdeviceapi.h>
 #include <FunctionDiscoveryKeys_devpkey.h>
 
+#include <vector>
+
 
 /* ***************************************************************************
  * Functions
@@ -32,6 +34,7 @@
 HRESULT SetDefaultAudioPlaybackDevice( LPCWSTR );
 
 void NextAudioPlaybackDevice( void );
+std::vector<std::pair<std::wstring, std::wstring>> EnumAudioPlaybackDevices(void);
 
 
 #endif
