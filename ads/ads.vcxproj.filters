@@ -36,6 +36,9 @@
     <ClInclude Include="AudioPlaybackControl.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="wxMyApp.cpp">
@@ -58,5 +61,15 @@
     <None Include="wxBaseApp.fbp">
       <Filter>Forms</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Файлы ресурсов</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="main.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
 </Project>
