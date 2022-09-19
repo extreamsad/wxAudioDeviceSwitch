@@ -56,10 +56,11 @@ wxMenu * MyTaskBarIcon::CreatePopupMenu()
 	{
 		//wxString dev_name{ device.szPname };		
 		wxMenuItem *devs_menu = new wxMenuItem(popup_menu, wxID_ANY, device.first, wxEmptyString, wxITEM_CHECK);
-		std::wstring &DevID = device.second;
+		std::wstring DevID = device.second;
 		popup_menu->Append(devs_menu);		
-		popup_menu->Bind(wxEVT_COMMAND_MENU_SELECTED, [DevID](wxCommandEvent&)
+		popup_menu->Bind(wxEVT_COMMAND_MENU_SELECTED, [DevID](wxCommandEvent& event)
 		{			
+			//if (event.IsChecked()) return;
 			MainForm::SetDefaultAudioPlaybackDevice(DevID.c_str());
 		}, devs_menu->GetId());
 		this->Connect(devs_menu->GetId(), wxEVT_UPDATE_UI, wxUpdateUIEventHandler(MyTaskBarIcon::OnMenuItemUpdateUI));

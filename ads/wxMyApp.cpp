@@ -14,7 +14,7 @@ bool wxMyApp::OnInit()
 
 	wxInitAllImageHandlers();
 	MainForm *mainForm = new MainForm(NULL);
-	mainForm->Show(true);
+	mainForm->Show(false);
 	return true;
 }
 

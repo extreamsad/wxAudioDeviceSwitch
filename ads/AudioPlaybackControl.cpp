@@ -176,7 +176,7 @@ std::vector<std::pair<std::wstring, std::wstring>> EnumAudioPlaybackDevices(void
 
 		hr = pDefaultEndpoint->GetId(&pwszDefaultID);
 	EXIT_ON_ERROR(hr)
-
+		
 		hr = pEnumerator->EnumAudioEndpoints(eRender, DEVICE_STATE_ACTIVE, &pCollection);
 	EXIT_ON_ERROR(hr)
 
