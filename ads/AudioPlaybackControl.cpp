@@ -144,7 +144,7 @@ Exit:
     SAFE_RELEASE(pProps)
 }
 
-std::vector<std::pair<std::wstring, std::wstring>> EnumAudioPlaybackDevices(void)
+audio_devices_t EnumAudioPlaybackDevices(void)
 {
 	HRESULT hr = S_OK;
 	IMMDeviceEnumerator *pEnumerator = NULL;
@@ -157,7 +157,7 @@ std::vector<std::pair<std::wstring, std::wstring>> EnumAudioPlaybackDevices(void
 	LPWSTR pwszDefaultID = NULL;
 	LPWSTR pwszNextID = NULL;
 	ULONG next = 0;
-	std::vector<std::pair<std::wstring, std::wstring>> ret;
+	audio_devices_t ret;
 
 	hr = CoInitialize(NULL);
 	EXIT_ON_ERROR(hr)
@@ -193,38 +193,38 @@ std::vector<std::pair<std::wstring, std::wstring>> EnumAudioPlaybackDevices(void
 				// Get the endpoint ID string.
 				hr = pEndpoint->GetId(&pwszID);
 			EXIT_ON_ERROR(hr)
-
-			next = (i + 1 < count) ? i + 1 : 0;
-			hr = pCollection->Item(next, &pNextEndpoint);
+			
+			//next = (i + 1 < count) ? i + 1 : 0;
+			hr = pCollection->Item(i, &pNextEndpoint);
 			EXIT_ON_ERROR(hr)
 
 				hr = pNextEndpoint->OpenPropertyStore(STGM_READ, &pProps);
 			EXIT_ON_ERROR(hr)
-
-				PROPVARIANT varName;
+			
+			PROPVARIANT varName;
 			PropVariantInit(&varName);
 
 			// Get the endpoint's friendly-name property.
 			hr = pProps->GetValue(PKEY_Device_FriendlyName, &varName);
 			EXIT_ON_ERROR(hr)
-
+				if (wcscmp(pwszDefaultID, pwszID) == 0)
+					ret.insert(ret.begin(), std::make_pair(varName.pwszVal, pwszID));
+				else 
+					ret.emplace_back(std::make_pair(varName.pwszVal, pwszID));
 				// Get the endpoint ID string.
 				hr = pNextEndpoint->GetId(&pwszNextID);
-			EXIT_ON_ERROR(hr)
-				ret.emplace_back(std::make_pair(varName.pwszVal, pwszNextID));
-				// Print endpoint friendly name and endpoint ID.
+			EXIT_ON_ERROR(hr)						
+			// Print endpoint friendly name and endpoint ID.
 #ifdef DEBUG
-				printf("Endpoint %d: %S\n", next, varName.pwszVal);
+			printf("Endpoint %d: %S\n", next, varName.pwszVal);
 #endif
 
-			//SetDefaultAudioPlaybackDevice(pwszNextID);
+					//SetDefaultAudioPlaybackDevice(pwszNextID);													
 
 			CoTaskMemFree(pwszNextID);
 			SAFE_RELEASE(pNextEndpoint)
 				//PropVariantClear(&varName);
 				//SAFE_RELEASE(pProps)
-
-
 			CoTaskMemFree(pwszID);
 			pwszID = NULL;
 			SAFE_RELEASE(pEndpoint)
@@ -243,6 +243,6 @@ Exit:
 		SAFE_RELEASE(pEndpoint)
 		SAFE_RELEASE(pProps)
 
-	return std::vector<std::pair<std::wstring, std::wstring>>();
+	return audio_devices_t();
 }
 

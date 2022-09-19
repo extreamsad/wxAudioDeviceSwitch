@@ -25,7 +25,10 @@
 #include <FunctionDiscoveryKeys_devpkey.h>
 
 #include <vector>
+#include <list>
 
+
+typedef std::list<std::pair<std::wstring, std::wstring>> audio_devices_t;
 
 /* ***************************************************************************
  * Functions
@@ -34,7 +37,7 @@
 HRESULT SetDefaultAudioPlaybackDevice( LPCWSTR );
 
 void NextAudioPlaybackDevice( void );
-std::vector<std::pair<std::wstring, std::wstring>> EnumAudioPlaybackDevices(void);
+audio_devices_t EnumAudioPlaybackDevices(void);
 
 
 #endif
