@@ -15,7 +15,7 @@ MyTaskBarIcon::~MyTaskBarIcon()
 
 void MyTaskBarIcon::OnLeftButtonDClick(wxTaskBarIconEvent &)
 {
-	m_main_form->Show();
+	//m_main_form->Show();
 }
 
 void MyTaskBarIcon::OnMenuOptions(wxCommandEvent &)
