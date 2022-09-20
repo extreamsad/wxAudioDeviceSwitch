@@ -21,10 +21,12 @@ using namespace std;
 class wxMyApp : public wxApp
 {
 	wxSingleInstanceChecker *m_checker = nullptr;
+	MainForm *m_mainform = nullptr;
 public:
 	wxMyApp();
 	~wxMyApp();
 	virtual bool OnInit() override;
 	virtual int OnExit() override;
+	virtual int FilterEvent(wxEvent& event) override;
 };
 

@@ -22,8 +22,9 @@ bool wxMyApp::OnInit()
 	}
 
 	wxInitAllImageHandlers();
-	MainForm *mainForm = new MainForm(NULL);
-	mainForm->Show(false);
+	m_mainform = new MainForm(NULL);
+	m_mainform->Show(false);
+	
 	return true;
 }
 
@@ -32,6 +33,18 @@ int wxMyApp::OnExit()
 	delete m_checker;
 	return 0;
 
+}
+
+int wxMyApp::FilterEvent(wxEvent & event)
+{
+	if((event.GetEventType() == wxEVT_KEY_DOWN) &&
+		(((wxKeyEvent&)event).GetKeyCode() == WXK_F1))
+	{
+		//m_mainform->OnHelpF1((wxKeyEvent&)event);
+		return true;
+	}
+
+	return -1;
 }
 
 IMPLEMENT_APP(wxMyApp)

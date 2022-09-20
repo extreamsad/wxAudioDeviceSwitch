@@ -19,6 +19,11 @@
 
 #pragma comment(lib, "Winmm.lib")
 
+enum {
+	HotKeyRegister = 105, 
+	HotKeyUnregister
+};
+
 class MyTaskBarIcon;
 class MainForm :
 	public MainFormBase
@@ -27,8 +32,13 @@ class MainForm :
 public:
 	static HRESULT SetDefaultAudioPlaybackDevice(LPCWSTR devID);
 	static std::vector<WAVEOUTCAPS> GetAudioPlaybackDevices();
+	
 	virtual void OnClose(wxCloseEvent& event) override;
 	virtual void OnMainMenuClose(wxCommandEvent& event) override;
+	
+	void OnHotkey(wxKeyEvent& event);
+	void OnRegisterHotKey(wxCommandEvent& WXUNUSED(event));
+	void OnUnregisterHotKey(wxCommandEvent& WXUNUSED(event));
 	MainForm(wxWindow* parent);
 	~MainForm();
 };

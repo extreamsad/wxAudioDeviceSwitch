@@ -35,7 +35,6 @@ std::vector<WAVEOUTCAPS> MainForm::GetAudioPlaybackDevices()
 void MainForm::OnClose(wxCloseEvent & event)
 {
 	Show(false);
-	//event.Skip();
 }
 
 void MainForm::OnMainMenuClose(wxCommandEvent & event)
@@ -43,10 +42,39 @@ void MainForm::OnMainMenuClose(wxCommandEvent & event)
 	Destroy();
 }
 
+void MainForm::OnHotkey(wxKeyEvent & event)
+{
+}
+
+void MainForm::OnRegisterHotKey(wxCommandEvent & WXUNUSED)
+{
+	 if ( RegisterHotKey(0, wxMOD_ALT | wxMOD_SHIFT, WXK_HOME) )
+		{
+			//m_logText->AppendText("Try pressing Alt-Shift-Home anywhere now.\n");
+		}
+		else
+		{
+			//m_logText->AppendText("Failed to register hot key.\n");
+		}
+}
+
+void MainForm::OnUnregisterHotKey(wxCommandEvent & WXUNUSED)
+{
+	/*
+	if ( !UnregisterHotKey(0) )
+		{
+			m_logText->AppendText("Failed to unregister hot key.\n");
+		}
+		*/
+}
+
 MainForm::MainForm(wxWindow* parent) :
 	MainFormBase(parent),
 	m_taskbar(new MyTaskBarIcon(this))
 {
+	Bind(wxEVT_HOTKEY, &MainForm::OnHotkey, this);
+	Bind(wxEVT_MENU, &MainForm::OnRegisterHotKey, this, HotKeyRegister);
+	Bind(wxEVT_MENU, &MainForm::OnUnregisterHotKey, this, HotKeyUnregister);
 //	NextAudioPlaybackDevice();
 	//auto devs = EnumAudioPlaybackDevices();
 	/*if (!m_taskbar->SetIcon(wxArtProvider::GetBitmapBundle(wxART_WX_LOGO, wxART_OTHER, wxSize(32, 32)),
