@@ -49,12 +49,12 @@ MainForm::MainForm(wxWindow* parent) :
 {
 //	NextAudioPlaybackDevice();
 	//auto devs = EnumAudioPlaybackDevices();
-	if (!m_taskbar->SetIcon(wxArtProvider::GetBitmapBundle(wxART_WX_LOGO, wxART_OTHER, wxSize(32, 32)),
+	/*if (!m_taskbar->SetIcon(wxArtProvider::GetBitmapBundle(wxART_WX_LOGO, wxART_OTHER, wxSize(32, 32)),
 		"Audio device switch\n"
 		"(Created by eXtream)"))
 	{
 		wxLogError("Could not set icon.");
-	} 
+	} */
 	
 	/*/
 	/*int nSoundCardCount = waveOutGetNumDevs();

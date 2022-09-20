@@ -71,5 +71,8 @@
     <Image Include="main.ico">
       <Filter>Файлы ресурсов</Filter>
     </Image>
+    <Image Include="main.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
 </Project>

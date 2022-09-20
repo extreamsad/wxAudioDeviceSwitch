@@ -1,5 +1,7 @@
 #pragma once
 
+#include "main_icon.xpm"
+
 #include "MainForm.h"
 #include "AudioPlaybackControl.h"
 

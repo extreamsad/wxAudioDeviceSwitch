@@ -6,6 +6,8 @@ MyTaskBarIcon::MyTaskBarIcon(MainForm* parent)
 {	
 	m_main_form = parent;	
 	this->Bind(wxEVT_TASKBAR_LEFT_DCLICK, &MyTaskBarIcon::OnLeftButtonDClick, this);
+	//SetIcon(wxBitmapBundle::FromBitmaps(wxBitmap("main.bmp", wxBITMAP_TYPE_BMP_RESOURCE), wxBitmap()));
+	SetIcon(wxBitmapBundle::FromBitmaps(wxBitmap(wxT("#103"), wxBITMAP_TYPE_ICO_RESOURCE), wxBitmap()));
 }
 
 
@@ -15,7 +17,6 @@ MyTaskBarIcon::~MyTaskBarIcon()
 
 void MyTaskBarIcon::OnLeftButtonDClick(wxTaskBarIconEvent &)
 {
-	//m_main_form->Show();
 }
 
 void MyTaskBarIcon::OnMenuOptions(wxCommandEvent &)
@@ -45,12 +46,8 @@ void MyTaskBarIcon::OnMenuAutorun(wxCommandEvent &)
 	wxRegKey key_hklm_run(wxRegKey::HKLM, m_autorun_key_path);
 	key_hklm_run.Open();
 	
-	if (!key_hklm_run.HasValue(m_key_name)) 		
-	{
-		auto path = wxStandardPaths::Get().GetExecutablePath();
-		auto str = wxString::Format("\"%s\"", path);
-		key_hklm_run.SetValue(m_key_name, str);
-	} else 
+	!key_hklm_run.HasValue(m_key_name) ?			
+		key_hklm_run.SetValue(m_key_name, wxString::Format("\"%s\"", wxStandardPaths::Get().GetExecutablePath())) :
 		key_hklm_run.DeleteValue(m_key_name);
 	key_hklm_run.Close();
 }
@@ -65,13 +62,11 @@ wxMenu * MyTaskBarIcon::CreatePopupMenu()
 
 	for (auto &device : EnumAudioPlaybackDevices())
 	{
-		//wxString dev_name{ device.szPname };		
 		wxMenuItem *devs_menu = new wxMenuItem(popup_menu, wxID_ANY, device.first, wxEmptyString, wxITEM_CHECK);
 		std::wstring DevID = device.second;
 		popup_menu->Append(devs_menu);		
 		popup_menu->Bind(wxEVT_COMMAND_MENU_SELECTED, [DevID](wxCommandEvent& event)
 		{			
-			//if (event.IsChecked()) return;
 			MainForm::SetDefaultAudioPlaybackDevice(DevID.c_str());
 		}, devs_menu->GetId());
 		this->Connect(devs_menu->GetId(), wxEVT_UPDATE_UI, wxUpdateUIEventHandler(MyTaskBarIcon::OnMenuItemUpdateUI));
