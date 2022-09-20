@@ -61,6 +61,9 @@
     <None Include="wxBaseApp.fbp">
       <Filter>Forms</Filter>
     </None>
+    <None Include="rcdata1.bin">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">
@@ -72,6 +75,15 @@
       <Filter>Файлы ресурсов</Filter>
     </Image>
     <Image Include="main.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="main.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="headset.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="subwoofer.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
   </ItemGroup>

@@ -7,7 +7,8 @@ MyTaskBarIcon::MyTaskBarIcon(MainForm* parent)
 	m_main_form = parent;	
 	this->Bind(wxEVT_TASKBAR_LEFT_DCLICK, &MyTaskBarIcon::OnLeftButtonDClick, this);
 	//SetIcon(wxBitmapBundle::FromBitmaps(wxBitmap("main.bmp", wxBITMAP_TYPE_BMP_RESOURCE), wxBitmap()));
-	SetIcon(wxBitmapBundle::FromBitmaps(wxBitmap(wxT("#103"), wxBITMAP_TYPE_ICO_RESOURCE), wxBitmap()));
+	//SetIcon(wxBitmapBundle::FromBitmaps(wxBitmap(wxT("#103"), wxBITMAP_TYPE_ICO_RESOURCE), wxBitmap()));
+	SetIcon(wxBitmapBundle::FromBitmaps(wxBitmap(wxT("#107"), wxBITMAP_TYPE_PNG_RESOURCE), wxBitmap()));
 }
 
 
